@@ -73,7 +73,7 @@
                 </div>
 
             </td>
-            <td style="vertical-align: top;" class="col-md-6">
+            <td style="vertical-align: top; background-color: #F7B660; border-radius: 8px;" class="col-md-6">
                 <h2>Add a post!</h2>
 
                 <form action="/posts/<?php echo $guitar->id ?>/new" method="post">
