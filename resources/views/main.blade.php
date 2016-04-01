@@ -21,7 +21,10 @@
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 8px;" class="col-md-4">
+            <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 4px;" class="col-md-4">
+                <h2>Welcome</h2>
+                <p>Our volume knobs go up to eleven</p>
+
                 <h2>Guitars</h2>
 
                 @if ($guitars)
@@ -43,7 +46,7 @@
                 @endif
 
             </td>
-            <td style="vertical-align: top; background-color: #F7B660; border-radius: 8px;" class="col-md-6">
+            <td style="vertical-align: top; background-color: #F7B660; border-radius: 4px;" class="col-md-6">
                 <h2>Add new guitar</h2>
 
 
@@ -77,6 +80,15 @@
                     @endforeach
                     </ul>
                 @endif
+
+                <h2>Guitar Brands Reference</h2>
+
+                @if ($guitars)
+                    @foreach ($guitars as $guitar)
+                        {{ $guitar->name }}
+                    @endforeach
+                @endif
+
             </td>
         </tr>
     </table>

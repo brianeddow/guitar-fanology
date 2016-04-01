@@ -3,7 +3,7 @@
     <head>
         <title>Guitars</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="./../../css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -11,31 +11,31 @@
     <body>
 
     <div class="container">
-    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-8">
+    <table style="padding-left: 20px; background-color: #fff;" class="col-md-8">
         <tr>
             <td>
-                <h1>Guitar Fanology</h1>
+                <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
             </td>
             <td style="text-align: right;" class="col-md-4">
                 <a href="/home">Logout</a> (as <?php echo Auth::user()->email; ?>)
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 8px;" class="col-md-4">
+            <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 4px;" class="col-md-4">
                 <h2>Axe Info...</h2>
 
                 @if ($guitar)
-                    Name: {{ $guitar->name }}<br />
-                    Model: {{ $guitar->model }}<br />
-                    Notes: {{ $guitar->notes }}<br />
+                    <span style="font-weight: bold;">Name:</span> {{ $guitar->name }}<br />
+                    <span style="font-weight: bold;">Model:</span> {{ $guitar->model }}<br />
+                    <span style="font-weight: bold;">Notes:</span> {{ $guitar->notes }}<br />
                 @endif
 
+                <h2>Actions</h2>
 
-                <br />
-                <a href="/guitars/<?php echo $guitar->id ?>/like">like</a> (<a href="/guitars/<?php echo $guitar->id ?>/unlike">unlike</a>)<br />
+                <a href="/guitars/<?php echo $guitar->id ?>/like">like</a> (<a href="/guitars/<?php echo $guitar->id ?>/unlike">undo</a>)<br />
                 <a href="/guitars/<?php echo $guitar->id ?>/edit">edit</a><br />
                 <a href="/guitars/<?php echo $guitar->id ?>/remove">delete</a><br />
-                <a href="/guitars">back</a>
+                <a href="/guitars"><< back</a>
 
                 <h3>Posts</h3>
 
@@ -55,7 +55,7 @@
 
                             <div style="padding-left: 20px;">
                                 <form action="/comments/<?php echo $post->id ?>/add" method="post">
-                                    <input type="text" name="body" placeholder="Comment...">
+                                    <input type="text" name="body" placeholder="Comment">
                                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                     <input type="submit" value="+" class="btn btn-danger">
                                 </form><br />
@@ -73,14 +73,16 @@
                 </div>
 
             </td>
-            <td style="vertical-align: top; background-color: #F7B660; border-radius: 8px;" class="col-md-6">
-                <h2>Add a post!</h2>
+            <td style="vertical-align: top; background-color: #F7B660; border-radius: 4px;" class="col-md-6">
+                <h3>What do you think of the
+                {{ $guitar->name }} {{ $guitar->model }}?
+                </h3>
 
                 <form action="/posts/<?php echo $guitar->id ?>/new" method="post">
                 <table>
                     <tr>
                         <td style="vertical-align: top;">
-                            Post: </td><td><textarea name="body" class="form-control"></textarea></td>
+                            Post:</td><td><textarea name="body" class="form-control" style="width: 300px;"></textarea></td>
                     </tr>
                     <tr>
                         <td></td>
