@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+    background-color: red;
+}
+.body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: table;
+    font-weight: 800;
+    font-family: 'Lato';
+}
+.container
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.content {
+    vertical-align: top;
+    display: inline-block;
+}
+.title {
+    font-size: 96px;
+}
+.main{
+    padding-left: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
