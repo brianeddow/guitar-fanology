@@ -28,11 +28,13 @@ class GuitarsController extends Controller
         return back();
     }
 
-    public function show($id, Guitar $guitar)
+    public function show($id)
     {
         $guitar = DB::table('guitars')->where(['id' => $id])->first();
         $guitar->posts = Post::where(['guitar_id' => $id])->get();
         $guitar->comments = DB::table('users')->join('comments', 'users.id', '=', 'comments.user_id')->get();
+        $guitar->other_users = DB::table('users')->join('likes', 'users.id', '=', 'likes.user_id')->join('guitars', 'likes.guitar_id', '=', 'guitars.id')->where('guitars.id', '=', $id)->where('likes.user_id', '!=', Auth::user()->id)->select('users.email')->get();
+        // var_dump($guitar->other_users); die();
         // $guitar->comments = Comment::get();
         return view('show', compact('guitar'));
     }

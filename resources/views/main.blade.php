@@ -10,8 +10,8 @@
     </head>
     <body>
 
-    <div class="container">
-    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-8">
+    <div class="container" style="margin-bottom: 20px;">
+    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-offset-2 col-md-8">
         <tr>
             <td>
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
@@ -35,7 +35,7 @@
                     </ul>
                 @endif
 
-                <h2>Favorite Guitars</h2>
+                <h2>My Favorites</h2>
 
                 @if ($likes)
                     <ul>
@@ -46,7 +46,16 @@
                 @endif
 
             </td>
-            <td style="vertical-align: top; background-color: #F7B660; border-radius: 4px;" class="col-md-6">
+            <td style="vertical-align: top; background-color: #F7E1B2; border-radius: 4px;" class="col-md-6">
+                <h2>Brands Reference</h2>
+
+                @if ($guitars)
+                    @foreach ($guitars as $guitar)
+                        {{ $guitar->name }}
+                    @endforeach
+                @endif
+
+                <br />
                 <h2>Add new guitar</h2>
 
 
@@ -79,14 +88,6 @@
                         <li>{{ $error }}</li>
                     @endforeach
                     </ul>
-                @endif
-
-                <h2>Guitar Brands Reference</h2>
-
-                @if ($guitars)
-                    @foreach ($guitars as $guitar)
-                        {{ $guitar->name }}
-                    @endforeach
                 @endif
 
             </td>

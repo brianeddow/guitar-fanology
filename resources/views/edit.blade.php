@@ -11,7 +11,7 @@
     <body>
 
     <div class="container">
-    <table style="padding-left: 20px; background-color: #fff;" class="col-md-8">
+    <table style="padding-left: 20px; background-color: #fff;" class="col-md-offset-2 col-md-8">
         <tr>
             <td>
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
@@ -25,8 +25,8 @@
                 <h2>Update Axe...</h2>
 
                 @if ($guitar)
-                    {{ $guitar->name }} {{ $guitar->model }}<br />
-                    - {{ $guitar->notes }}<br />
+                    <span style="font-weight: bold;">{{ $guitar->name }} {{ $guitar->model }}</span><br />
+                    Notes: {{ $guitar->notes }}<br />
                 @endif
 
                 <br />
@@ -64,7 +64,7 @@
                 @endif
 
                 <br />
-                <a href="/guitars/<?php echo $guitar->id ?>/"><< back</a>
+                <a href="/guitars/<?php echo $guitar->id ?>/"><< back</a><br /><br />
 
             </td>
             <td style="vertical-align: top;" class="col-md-4">

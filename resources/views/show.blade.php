@@ -10,8 +10,8 @@
     </head>
     <body>
 
-    <div class="container">
-    <table style="padding-left: 20px; background-color: #fff;" class="col-md-8">
+    <div class="container" style="margin-bottom: 20px;">
+    <table style="padding-left: 20px; background-color: #fff;" class="col-md-offset-2 col-md-8">
         <tr>
             <td>
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
@@ -37,25 +37,25 @@
                 <a href="/guitars/<?php echo $guitar->id ?>/remove">delete</a><br />
                 <a href="/guitars"><< back</a>
 
-                <h3>Posts</h3>
+                <h2>Posts</h2>
 
                 <div style="padding-left: 10px;">
                     @if ($guitar->posts)
                         @foreach ($guitar->posts as $post)
-                            <p style="background-color: #eee; border-radius: 6px; padding-left: 10px;">{{ $post->body }}<br />
-                            by {{ $post->user->email }} - <a href="/posts/<?php echo $post->id; ?>/delete/">delete</a></p>
+                            <p style="background-color: #BDB3AF; border-radius: 6px; padding-left: 10px;">{{ $post->body }}<br />
+                            by <span style="font-weight: bold;">{{ $post->user->email }}<span> - <a href="/posts/<?php echo $post->id; ?>/delete/">delete</a></p>
 
                             @if ($guitar->comments)
                                 @foreach ($guitar->comments as $comm)
                                     @if ($comm->post_id == $post->id)
-                                        <p style="padding-left: 20px;">{{ $comm->body }} by {{ $comm->email }} - <a href="/comments/<?php echo $comm->id; ?>/delete/">delete</a></p>
+                                        <p style="padding-left: 20px;">{{ $comm->body }} by <span style="font-weight: bold;">{{ $comm->email }}</span> - <a href="/comments/<?php echo $comm->id; ?>/delete/">delete</a></p>
                                     @endif
                                 @endforeach
                             @endif
 
                             <div style="padding-left: 20px;">
                                 <form action="/comments/<?php echo $post->id ?>/add" method="post">
-                                    <input type="text" name="body" placeholder="Comment">
+                                    <input type="text" name="body" placeholder="Comment" style="width: 270px;">
                                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                     <input type="submit" value="+" class="btn btn-danger">
                                 </form><br />
@@ -73,9 +73,9 @@
                 </div>
 
             </td>
-            <td style="vertical-align: top; background-color: #F7B660; border-radius: 4px;" class="col-md-6">
-                <h3>What do you think of the
-                {{ $guitar->name }} {{ $guitar->model }}?
+            <td style="vertical-align: top; background-color: #F7E1B2; border-radius: 4px;" class="col-md-6">
+                <h3>Share what you think of the
+                {{ $guitar->name }} {{ $guitar->model }}
                 </h3>
 
                 <form action="/posts/<?php echo $guitar->id ?>/new" method="post">
@@ -100,6 +100,20 @@
                     @endforeach
                     </ul>
                 @endif
+
+                <br /><br />
+                <h3>We like this guitar!</h3>
+
+                @if ($guitar->other_users)
+                    <ul>
+                    @foreach ($guitar->other_users as $user)
+                        <li>{{ $user->email }}</li>
+                    @endforeach
+                    </ul>
+                @else
+                    <p>(No one else yet)</p>
+                @endif
+
             </td>
         </tr>
     </table>

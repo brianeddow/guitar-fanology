@@ -11,7 +11,7 @@
     <body>
 
     <div class="container">
-    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-8">
+    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-offset-2 col-md-8">
         <tr>
             <td>
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
@@ -29,8 +29,8 @@
                 @endif
 
                 <br />
-                <a href="/guitars/<?php echo $guitar->id ?>/destroy">remove</a><br />
-                <a href="/guitars/<?php echo $guitar->id ?>/"><< back</a>
+                <a href="/guitars/<?php echo $guitar->id ?>/destroy">Yes, Remove</a><br />
+                <a href="/guitars/<?php echo $guitar->id ?>/"><< back</a><br /><br />
 
             </td>
             <td style="vertical-align: top;" class="col-md-4">
