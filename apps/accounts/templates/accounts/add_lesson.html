@@ -1,0 +1,27 @@
+<html>
+	<head>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	</head>
+<body>
+
+<table>
+	<tr>
+		<td>
+		<h1>Add a lesson</h1>
+		</td>
+		<td>
+		<h2> - <a href="{% url 'manage_lessons' %}"> Home</a></h2>
+		</td>
+	</tr>
+</table>
+
+<form action="{% url 'add_lesson' %}" method='post'>
+	{% csrf_token %}
+	<p>name: <input type="text" name="name" /></p>
+	<p>lesson: <textarea name="lesson_content" class=""></textarea></p>
+	<input type="submit" value="Add Lesson" />
+</form>
+
+</body>
+</html>

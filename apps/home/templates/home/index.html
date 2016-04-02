@@ -1,0 +1,265 @@
+<html>
+	<head>
+		<title>Chord Jam</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'home/style.css' %}">
+
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script>
+        	var API_KEY = '';
+			$.ajaxSetup({
+			    beforeSend: function(xhr) {
+		        xhr.setRequestHeader('Guitarparty-Api-Key', API_KEY);
+			    }
+			});
+
+            $(document).ready(function(){
+                $.get("http://api.guitarparty.com/v2/songs/?query=Counting+Stars", function(res) {
+                	console.log(res);
+                    str = "";
+	                    for(var i=0; i < res.objects.length; i++)
+	                    {
+	                    	str += "<h1><em>Body Chords</em></h1>";
+	                    	str += "<p>" + res.objects[i].title + "</p>";
+	                    	str += "<p>" + res.objects[i].body_chords_html + "</p>";
+	                    	str += "<br />";
+	                    	$('#songs').html(str);
+	                    }
+                	}, "json");
+
+
+                $("#clear").click(function(){
+            		str = "";
+            		$('#notes').html(str);
+                });
+
+           		$("#AM").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=A", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: A Major</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#Am").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=Am", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: A Minor</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#BM").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=B", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: B Major</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#Bm").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=Bm", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: B Minor</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#CM").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=C", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: C Major</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#Cm").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=Cm", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: C Minor</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#DM").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=D", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: D Major</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#Dm").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=Dm", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: D Minor</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#EM").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=E", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: E Major</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#Em").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=Em", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: E Minor</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#FM").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=F", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: F Major</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#Fm").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=Fm", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: F Minor</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#GM").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=G", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: G Major</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+                $("#Gm").click(function(){
+                	$.get("http://api.guitarparty.com/v2/chords/?query=Gm", function(res){
+                		console.log(res);
+                		str = "";
+                		for(var i=0; i < res.objects.length; i++)
+                		{
+                			str += "<h3><em>" + res.objects[i].name + "</em>: G Minor</h3>";
+	                    	str += "<p><img src="+res.objects[i].image_url+"></p>";
+	                    	$('#notes').html(str);
+                		}
+                	}, 'json');
+                });
+
+            })
+        </script>
+
+</head>
+<body>
+
+    <div id="headline">
+        <img src="{% static 'home/headline.png' %}">
+    </div>
+    <div id="wrapper">
+
+	<div id="chords">
+                <strong><a href="/">Home</a></strong> |
+                <strong><a href="{% url 'chords' %}">Chords</a></strong> |
+                <strong><a href="{% url 'discovery' %}">Discovery</a></strong> |
+                <strong><a href="{% url 'accounts_index' %}">Jam Room</a></strong> |
+                <strong><a href="{% url 'review_us' %}">Review ChordJam</a></strong><br />
+
+                <a href="{% url 'show' 'A' %}">A Major</a>
+                <a href="{% url 'show' 'Am' %}">A Minor</a>
+                <a href="{% url 'show' 'B' %}">B Major</a>
+                <a href="{% url 'show' 'Bm' %}">B Minor</a>
+                <a href="{% url 'show' 'C' %}">C Major</a>
+                <a href="{% url 'show' 'Cm' %}">C Minor</a>
+                <a href="{% url 'show' 'D' %}">D Major</a>
+                <a href="{% url 'show' 'Dm' %}">D Minor</a>
+                <a href="{% url 'show' 'E' %}">E Major</a>
+                <a href="{% url 'show' 'Em' %}">E Minor</a>
+                <a href="{% url 'show' 'F' %}">F Major</a>
+                <a href="{% url 'show' 'Fm' %}">F Minor</a>
+                <a href="{% url 'show' 'G' %}">G Major</a>
+                <a href="{% url 'show' 'Gm' %}">G Minor</a>
+
+                <!-- Guitar Banner -->
+                <p><img src="{% static 'home/guitar_3.png' %}" width="700px" /></p>
+                <!-- End Guitar Banner -->
+
+                <!-- Chord IMG Calls -->
+                <button id="AM" class="button">A Major</button>
+                <button id="Am" class="button">A Minor</button>
+                <button id="BM" class="button">B Major</button>
+                <button id="Bm" class="button">B Minor</button>
+                <button id="CM" class="button">C Major</button>
+                <button id="Cm" class="button">C Minor</button>
+                <button id="DM" class="button">D Major</button>
+                <button id="Dm" class="button">D Minor</button>
+                <button id="EM" class="button">E Major</button>
+                <button id="Em" class="button">E Minor</button>
+                <button id="FM" class="button">F Major</button>
+                <button id="Fm" class="button">F Minor</button>
+                <button id="GM" class="button">G Major</button>
+                <button id="Gm" class="button">G Minor</button>
+                <button id="clear" class="button">Clear</button>
+                <!-- End Chord IMG Calls -->
+	</div>
+	<div id="notes"></div>
+	<div id="songs"></div>
+
+    </div>
+</body>
+</html>

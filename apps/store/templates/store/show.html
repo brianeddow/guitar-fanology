@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show More</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'store/style.css' %}">
+</head>
+<body>
+
+<h1>Your info!</h1>
+
+{% if guitars %}
+	<ul>
+	{% for guitar in guitars %}
+		<li>{{guitar.name}} - {{guitar.model}}</li>
+		{% if guitar.name == 'Ovation' %}
+		<ul>
+		<li><img src="{% static 'store/ovationelite.png' %}" width=500 height=200></li>
+		</ul>
+		{% endif %}
+		{% if guitar.name == 'Gibson' %}
+		<ul>
+		<li><img src="{% static 'store/gibsonlespaul.jpg' %}" width=500 height=200></li>
+		</ul>
+		{% endif %}
+		{% if guitar.name == 'ESP' %}
+		<ul>
+		<li><img src="{% static 'store/especlipse.jpg' %}" width=500 height=200></li>
+		</ul>
+		{% endif %}
+		{% if guitar.name == 'Fender' %}
+		<ul>
+		<li><img src="{% static 'store/fenderstrat.jpg' %}" width=500 height=200></li>
+		</ul>
+		{% endif %}
+		{% if guitar.name == 'Epiphone' %}
+		<ul>
+		<li><img src="{% static 'store/epiphone.jpg' %}" width=500 height=200></li>
+		</ul>
+		{% endif %}
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>Could not find your info!</p>
+{% endif %}
+
+</body>
+</html>

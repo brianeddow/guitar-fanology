@@ -1,0 +1,69 @@
+<html>
+	<head>
+		<title>Chord Jam</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'home/style.css' %}">
+
+	</head>
+<body>
+
+<div id="headline">
+        <img src="{% static 'home/headline.png' %}">
+</div>
+
+<div id="wrapper">
+	<div id="chords">
+		<strong><a href="/">Home</a></strong> |
+		<strong><a href="{% url 'chords' %}">Chords</a></strong> |
+		<strong><a href="{% url 'discovery' %}">Discovery</a></strong> |
+		<strong><a href="{% url 'accounts_index' %}">Jam Room</a></strong> |
+		<strong><a href="{% url 'review_us' %}">Review ChordJam</a></strong><br />
+
+		<a href="{% url 'show' 'A' %}">A Maj</a>
+        <a href="{% url 'show' 'Am' %}">A Minor</a>
+        <a href="{% url 'show' 'B' %}">B Maj</a>
+        <a href="{% url 'show' 'Bm' %}">B Minor</a>
+        <a href="{% url 'show' 'C' %}">C Maj</a>
+        <a href="{% url 'show' 'Cm' %}">C Minor</a>
+        <a href="{% url 'show' 'D' %}">D Maj</a>
+        <a href="{% url 'show' 'Dm' %}">D Minor</a>
+        <a href="{% url 'show' 'E' %}">E Maj</a>
+        <a href="{% url 'show' 'Em' %}">E Minor</a>
+        <a href="{% url 'show' 'F' %}">F Maj</a>
+        <a href="{% url 'show' 'Fm' %}">F Minor</a>
+        <a href="{% url 'show' 'G' %}">G Maj</a>
+        <a href="{% url 'show' 'Gm' %}">G Minor</a> |
+		<p><img src="{% static 'home/guitar_2.png' %}" width="700px" /></p>
+	</div>
+
+	<div id="chords">
+
+	<table class="member_area">
+		<thead>
+			<tr>
+				<th class="left"><h1>Hello, {{ user }}</h1></th>
+				<th class="right">
+					<a href="{% url 'accounts_success' %}">All Lessons</a> |
+					<a href="{% url 'accounts_logout' %}">Logout</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+
+				Title: <span class="bold">{{ lesson.name }}</span> - <a href="{% url 'like_lesson' lesson.id %}">Like!</a>
+
+				<h4>Lesson...</h4>
+				<p>{{ lesson.lesson_content }}</p>
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	</div>
+</div>
+
+</body>
+</html>
