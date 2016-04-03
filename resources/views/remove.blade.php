@@ -4,7 +4,7 @@
         <title>Guitars</title>
 
         <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="./../../css/style.css">
+        <link rel="stylesheet" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     </head>
@@ -17,7 +17,7 @@
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
             </td>
             <td style="text-align: right;" class="col-md-4">
-                <a href="/home">Logout</a> (as <?php echo Auth::user()->email; ?>)
+                <a href="/logout">Logout</a> (as <?php echo Auth::user()->email; ?>)
             </td>
         </tr>
         <tr>
@@ -30,7 +30,7 @@
 
                 <br />
                 <a href="/guitars/<?php echo $guitar->id ?>/destroy">Yes, Remove</a><br />
-                <a href="/guitars/<?php echo $guitar->id ?>/"><< back</a><br /><br />
+                <a href="/guitars/<?php echo $guitar->id ?>/"><< Back</a><br /><br />
 
             </td>
             <td style="vertical-align: top;" class="col-md-4">

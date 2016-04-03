@@ -34,8 +34,17 @@ class GuitarsController extends Controller
         $guitar->posts = Post::where(['guitar_id' => $id])->get();
         $guitar->comments = DB::table('users')->join('comments', 'users.id', '=', 'comments.user_id')->get();
         $guitar->other_users = DB::table('users')->join('likes', 'users.id', '=', 'likes.user_id')->join('guitars', 'likes.guitar_id', '=', 'guitars.id')->where('guitars.id', '=', $id)->where('likes.user_id', '!=', Auth::user()->id)->select('users.email')->get();
+        $guitar->auth_id = Auth::user()->id;
+
+        $other_users_arr = [];
+        foreach ($guitar->other_users as $user)
+        {
+            array_push($other_users_arr, $user);
+        }
+
+        $guitar->other_users_count = count($other_users_arr);
+        // var_dump($guitar->other_users_count); die();
         // var_dump($guitar->other_users); die();
-        // $guitar->comments = Comment::get();
         return view('show', compact('guitar'));
     }
 

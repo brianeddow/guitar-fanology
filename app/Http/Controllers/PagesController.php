@@ -18,8 +18,9 @@ class PagesController extends Controller
         else
         {
             $guitars = DB::table('guitars')->get();
+            $guitar_imgs = DB::table('guitars')->groupBy('name')->get();
             $likes = DB::table('users')->join('likes', 'users.id', '=', 'likes.user_id')->join('guitars', 'likes.guitar_id', '=', 'guitars.id')->where('users.id', '=', Auth::user()->id)->get();
-            return view('main')->with(['guitars' => $guitars, 'likes' => $likes]);
+            return view('main')->with(['guitars' => $guitars, 'likes' => $likes, 'guitar_imgs' => $guitar_imgs]);
         }
     }
 }

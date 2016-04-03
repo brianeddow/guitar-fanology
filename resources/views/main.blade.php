@@ -17,14 +17,15 @@
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
             </td>
             <td style="text-align: right;" class="col-md-4">
-                <a href="/home">Logout</a> (as <?php echo Auth::user()->email ?>)
+                <a href="/logout">Logout</a> (as <?php echo Auth::user()->email ?>)
             </td>
         </tr>
         <tr>
             <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 4px;" class="col-md-4">
                 <h2>Welcome</h2>
-                <p>Our volume knobs go up to eleven</p>
+                <p> - Our volume knobs go up to eleven</p>
 
+                <hr>
                 <h2>Guitars</h2>
 
                 @if ($guitars)
@@ -35,7 +36,8 @@
                     </ul>
                 @endif
 
-                <h2>My Favorites</h2>
+                <hr>
+                <h2>*Favorites</h2>
 
                 @if ($likes)
                     <ul>
@@ -49,15 +51,20 @@
             <td style="vertical-align: top; background-color: #F7E1B2; border-radius: 4px;" class="col-md-6">
                 <h2>Brands Reference</h2>
 
-                @if ($guitars)
-                    @foreach ($guitars as $guitar)
-                        {{ $guitar->name }}
-                    @endforeach
-                @endif
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            @if ($guitar_imgs)
+                                @foreach ($guitar_imgs as $guitar)
+                                    <img src="/img/{{ $guitar->name }}.png" style="width:60px;heigth:40px;">
+                                @endforeach
+                            @endif
+                        </td>
+                    </tr>
+                </table>
 
-                <br />
+                <hr>
                 <h2>Add new guitar</h2>
-
 
                 <form action="/guitars/new" method="post">
                 <table>
