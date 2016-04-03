@@ -53,13 +53,15 @@
 				<td>
 
 					<h4>All Lessons</h4>
-					<ul>
 					{% if lessons %}
+					<ul>
 						{% for lesson in lessons %}
 						<li><a href="{% url 'lessons' lesson.id %}">{{ lesson.name }}</a></li>
 						{% endfor %}
-					{% endif %}
 					</ul>
+					{% else %}
+						<p>No lessons yet...</p>
+					{% endif %}
 
 				</td>
 				<td class="top">
@@ -71,8 +73,9 @@
 							<li><a href="{% url 'lessons' like.id %}">{{ like }}</a></li>
 						{% endfor %}
 						</ul>
+					{% else %}
+						<p>Your favorite lessons will appear here...</p>
 					{% endif %}
-
 				</td>
 			</tr>
 		</tbody>
