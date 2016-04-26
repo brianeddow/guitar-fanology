@@ -11,7 +11,7 @@
     <body>
 
     <div class="container">
-    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-offset-2 col-md-8">
+    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-offset-1 col-md-10">
         <tr>
             <td>
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
@@ -21,8 +21,8 @@
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 4px;" class="col-md-4">
-                <h2>Destroy Axe...</h2>
+            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-color: #B8B8B8; border: 1px solid black;" class="col-md-5">
+                <h3>Destroy Axe...</h3>
 
                 @if ($guitar)
                     Are you sure you want to remove the {{ $guitar->name }} {{ $guitar->model }}?<br />

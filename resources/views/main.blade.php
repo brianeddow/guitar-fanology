@@ -7,11 +7,21 @@
         <link rel="stylesheet" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <style>
+            input.transparent-input{
+                background-color: rgba(255,255,255,0.5) !important;
+                border:none !important;
+            }
+            textarea.transparent-input{
+                background-color: rgba(255,255,255,0.5) !important;
+                border:none !important;
+            }
+        </style>
     </head>
     <body>
 
     <div class="container" style="margin-bottom: 20px;">
-    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-offset-2 col-md-8">
+    <table style="padding-left: 20px; background-color: #fff; border-radius: 8px;" class="col-md-offset-1 col-md-10">
         <tr>
             <td>
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
@@ -21,12 +31,12 @@
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 4px;" class="col-md-4">
-                <h2>Welcome</h2>
-                <p> - Our volume knobs go up to eleven</p>
+            <td style="vertical-align: top; background-color: #b8b8b8; border: 1px solid black; border-right: 0px;" class="col-md-5">
+                <h3>Welcome</h3>
+                <p> - What tuning do you play in?</p>
 
                 <hr>
-                <h2>Guitars</h2>
+                <h3>Guitars</h3>
 
                 @if ($guitars)
                     <ul>
@@ -34,10 +44,12 @@
                         <li><a href="/guitars/<?php echo $guitar->id ?>">{{ $guitar->name }} {{ $guitar->model }}</a></li>
                     @endforeach
                     </ul>
+                @else
+                    <p>Add a guitar!</p>
                 @endif
 
                 <hr>
-                <h2>*Favorites</h2>
+                <h3>*Favorites</h3>
 
                 @if ($likes)
                     <ul>
@@ -45,46 +57,51 @@
                         <li><a href="/guitars/{{ $like->guitar_id }}/">{{ $like->name }} {{ $like->model }}</a></li>
                     @endforeach
                     </ul>
+                @else
+                    <p>You haven't liked any guitars yet</p>
                 @endif
 
             </td>
-            <td style="vertical-align: top; background-color: #F7E1B2; border-radius: 4px;" class="col-md-6">
-                <h2>Brands Reference</h2>
+            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-color: #b8b8b8; border: 1px solid black; border-left: 0;" class="col-md-5">
+                <h3>Brands Reference</h3>
 
                 <table style="width: 100%;">
                     <tr>
-                        <td>
+                        <td style="text-align: center;">
                             @if ($guitar_imgs)
                                 @foreach ($guitar_imgs as $guitar)
                                     <img src="/img/{{ $guitar->name }}.png" style="width:60px;heigth:40px;">
                                 @endforeach
+                            @else
+                                <p>Guitars added will show up here</p>
                             @endif
                         </td>
                     </tr>
                 </table>
 
                 <hr>
-                <h2>Add new guitar</h2>
+                <h3>Add new guitar</h3>
 
                 <form action="/guitars/new" method="post">
                 <table>
                     <tr>
                         <td>
-                            name:</td><td><input type="text" name="name" value="{{ old('name') }}" class="form-control"></td>
+                            name:</td><td><input type="text" name="name" value="{{ old('name') }}" class="form-control transparent-input"></td>
                     </tr>
                     <tr>
                         <td>
-                            model:</td><td><input type="text" name="model" value="{{ old('model') }}" class="form-control"></td>
+                            model:</td><td><input type="text" name="model" value="{{ old('model') }}" class="form-control transparent-input"></td>
                     </tr>
                     <tr>
-                        <td>
-                            notes:</td><td><input type="text" name="notes" value="{{ old('notes') }}" class="form-control"></td>
+                        <td style="vertical-align: top;">
+                            notes:</td><td><textarea name="notes" value="{{ old('notes') }}" class="form-control transparent-input"></textarea></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><br />
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             <input type="submit" value="Add Guitar" class="btn btn-danger">
+                            <br /><br />
                         </td>
                     </tr>
                 </table>

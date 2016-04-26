@@ -7,11 +7,21 @@
         <link rel="stylesheet" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <style>
+            input.transparent-input{
+               background-color: rgba(255,255,255,0.5) !important;
+               border:none !important;
+            }
+            textarea.transparent-input{
+               background-color: rgba(255,255,255,0.5) !important;
+               border:none !important;
+            }
+        </style>
     </head>
     <body>
 
     <div class="container" style="margin-bottom: 20px;">
-    <table style="padding-left: 20px; background-color: #fff;" class="col-md-offset-2 col-md-8">
+    <table style="padding-left: 20px; background-color: #fff;" class="col-md-offset-1 col-md-10">
         <tr>
             <td>
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
@@ -21,8 +31,8 @@
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: top; width: 400px; background-color: #FAD2B1; border-radius: 4px;" class="col-md-4">
-                <h2>Axe Info...</h2>
+            <td style="vertical-align: top; background-color: #b8b8b8; border: 1px solid black; border-right: 0px;" class="col-md-5">
+                <h3>Axe Info...</h3>
 
                 @if ($guitar)
                     <span style="font-weight: bold;">Name:</span> {{ $guitar->name }}<br />
@@ -54,12 +64,12 @@
                 </table>
 
                 <hr>
-                <h2>Posts</h2>
+                <h3>Posts</h3>
 
                 <div style="padding-left: 10px;">
                     @if ($guitar->posts)
                         @foreach ($guitar->posts as $post)
-                            <p style="background-color: #BDB3AF; border-radius: 6px; padding-left: 10px;">{{ $post->body }}<br />
+                            <p style="background-color: #DDCDB6; border-radius: 6px; padding-left: 10px;">{{ $post->body }}<br />
                             by <span style="font-weight: bold;">{{ $post->user->email }}<span>
 
                             @if ($post->user_id == $guitar->auth_id)
@@ -69,7 +79,7 @@
                             @if ($guitar->comments)
                                 @foreach ($guitar->comments as $comm)
                                     @if ($comm->post_id == $post->id)
-                                        <p style="padding-left: 20px;">{{ $comm->body }} by <span style="font-weight: bold;">{{ $comm->email }}</span>
+                                        <p style="margin-left: 20px; padding-left: 5px; background-color: #E3D3BA; border-radius: 6px;">{{ $comm->body }} by <span style="font-weight: bold;">{{ $comm->email }}</span>
 
                                         @if ($comm->user_id == $guitar->auth_id)
                                              - <a href="/comments/<?php echo $comm->id; ?>/delete/">delete</a></p>
@@ -85,7 +95,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <input type="text" name="body" placeholder="Comment" style="width: 270px;" class="form-control">
+                                                <input type="text" name="body" placeholder="Comment" style="width: 290px;" class="form-control transparent-input">
                                             </td>
                                             <td style="padding-left: 7px;">
                                                 <input type="submit" value="+" class="btn btn-danger">
@@ -103,28 +113,30 @@
                             </div>
 
                         @endforeach
+
+                    @else
+                        <p>Add a post --></p>
                     @endif
                 </div>
 
             </td>
-            <td style="vertical-align: top; background-color: #F7E1B2; border-radius: 4px;" class="col-md-6">
-                <h2>Actions</h2>
+            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-color: #b8b8b8; border: 1px solid black; border-left: 0px;" class="col-md-5">
+                <h3>Actions</h3>
 
                 <a href="/guitars/<?php echo $guitar->id ?>/like">like</a> (<a href="/guitars/<?php echo $guitar->id ?>/unlike">undo</a>)<br />
                 <a href="/guitars/<?php echo $guitar->id ?>/edit">edit</a><br />
                 <a href="/guitars/<?php echo $guitar->id ?>/remove">delete</a><br />
-                <a href="/guitars"><< Back</a>
+                <a href="/guitars"><< Home</a>
 
                 <hr>
-                <h3>Share what you think of the
-                {{ $guitar->model }}
+                <h3>Share what you think of the {{ $guitar->model }}
                 </h3>
 
                 <form action="/posts/<?php echo $guitar->id ?>/new" method="post">
                 <table>
                     <tr>
                         <td style="vertical-align: top;">
-                            Post:</td><td><textarea name="body" class="form-control" style="width: 300px;"></textarea></td>
+                            Post:</td><td><textarea name="body" class="form-control transparent-input" style="width: 300px;"></textarea></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -143,6 +155,7 @@
                     @endforeach
                     </ul>
                 @endif
+                <br /><br />
 
             </td>
         </tr>

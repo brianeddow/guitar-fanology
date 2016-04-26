@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
-use DateTime;
 use App\Post;
 use App\Comment;
 use App\Guitar;
 use Auth;
+use DateTime;
 
 class GuitarsController extends Controller
 {
@@ -51,22 +51,27 @@ class GuitarsController extends Controller
     public function edit($id)
     {
         $guitar = DB::table('guitars')->where(['id' => $id])->first();
-        return view('edit')->with(['guitar' => $guitar]);
+        $notes = DB::table('edit_guitar_notes_request')->leftJoin('edit_guitar_notes_request_likes', 'edit_guitar_notes_request.note_id', '=', 'edit_guitar_notes_request_likes.like_id')->where(['guitar_id' => $id])->orderBy('edit_guitar_notes_request_likes.count', 'desc')->get();
+        // $likes = DB::table('edit_guitar_notes_request_likes')->get();
+        // var_dump($likes); die();
+        return view('edit')->with(['guitar' => $guitar, 'notes' => $notes]);
     }
 
     public function update($id, Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:3',
-            'model' => 'required|min:3',
             'notes' => 'required|min:10'
         ]);
 
-        $name = $request->input('name');
-        $model = $request->input('model');
         $notes = $request->input('notes');
-        DB::table('guitars')->where('id', $id)->update(['name' => $name, 'model' => $model, 'notes' => $notes]);
-        return redirect('guitars');
+
+        DB::table('edit_guitar_notes_request')->insert(['guitar_id' => $id, 'user_id' => Auth::user()->id, 'notes' => $notes, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
+
+        $note = DB::table('edit_guitar_notes_request')->orderBy('created_at', 'desc')->first();
+        // var_dump($note->note_id); die();
+
+        DB::table('edit_guitar_notes_request_likes')->insert(['edit_guitar_notes_request_id' => $note->note_id, 'count' => 0]);
+        return redirect('/guitars/'.$id.'/edit');
     }
 
     public function remove($id)
@@ -92,4 +97,14 @@ class GuitarsController extends Controller
         DB::table('likes')->where(['user_id' => Auth::user()->id, 'guitar_id' => $guitar_id])->delete();
         return back();
     }
+
+    public function like_note($note_id)
+    {
+        $like = DB::table('edit_guitar_notes_request_likes')->where(['edit_guitar_notes_request_id' => $note_id])->first();
+        // var_dump($like->count); die();
+        $like->count += 1;
+        DB::table('edit_guitar_notes_request_likes')->where(['like_id' => $like->like_id])->update(['count' => $like->count]);
+        return back();
+    }
+
 }

@@ -26,11 +26,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('guitars/new', 'GuitarsController@create')->name('new');
     Route::get('guitars/{id}', 'GuitarsController@show')->name('show');
     Route::get('guitars/{id}/edit', 'GuitarsController@edit')->name('edit');
-    Route::patch('guitars/{id}', 'GuitarsController@update')->name('update');
+    Route::patch('guitars/{id}/update', 'GuitarsController@update')->name('update');
     Route::get('guitars/{id}/remove', 'GuitarsController@remove')->name('remove');
     Route::get('guitars/{id}/destroy', 'GuitarsController@destroy')->name('destroy');
     Route::get('guitars/{id}/like', 'GuitarsController@like')->name('like');
     Route::get('guitars/{id}/unlike', 'GuitarsController@unlike')->name('unlike');
+    Route::post('guitars/{id}/edit', 'GuitarsController@request_edit')->name('request_edit');
+    Route::get('guitars/{id}/like_note', 'GuitarsController@like_note')->name('like_note');
 
     Route::post('posts/{guitar_id}/new', 'PostsController@create')->name('create_post');
     Route::get('posts/{post_id}/delete', 'PostsController@delete')->name('delete_post');
