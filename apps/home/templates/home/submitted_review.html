@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>Chord Jam</title>
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'home/style.css' %}">
+
+	</head>
+<body>
+
+<div id="headline">
+        <img src="{% static 'home/headline.png' %}">
+</div>
+
+<div id="wrapper">
+	<div id="chords">
+		<strong><a href="/">Home</a></strong> |
+		<a href="{% url 'show' 'A' %}">A Maj</a>
+        <a href="{% url 'show' 'Am' %}">A Minor</a>
+        <a href="{% url 'show' 'B' %}">B Maj</a>
+        <a href="{% url 'show' 'Bm' %}">B Minor</a>
+        <a href="{% url 'show' 'C' %}">C Maj</a>
+        <a href="{% url 'show' 'Cm' %}">C Minor</a>
+        <a href="{% url 'show' 'D' %}">D Maj</a>
+        <a href="{% url 'show' 'Dm' %}">D Minor</a>
+        <a href="{% url 'show' 'E' %}">E Maj</a>
+        <a href="{% url 'show' 'Em' %}">E Minor</a>
+        <a href="{% url 'show' 'F' %}">F Maj</a>
+        <a href="{% url 'show' 'Fm' %}">F Minor</a>
+        <a href="{% url 'show' 'G' %}">G Maj</a>
+        <a href="{% url 'show' 'Gm' %}">G Minor</a> |
+		<p><img src="{% static 'home/guitar_2.png' %}" width="700px" /></p>
+	</div>
+
+	<div id="chords">
+	<table>
+		<thead>
+			<tr>
+				<th>Your Review!</th>
+				<th><a href="{% url 'reviews' %}">Reviews</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<p>Name: {{ name }}</p>
+					<p>Review: {{ review }}</p>
+					<p>Rating: {{ rating }}</p>
+					<p>Suggestions: {{ suggestions }}</p>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+
+</body>
+</html>
