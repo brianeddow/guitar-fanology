@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <style>
             input.transparent-input{
                 background-color: rgba(255,255,255,0.5) !important;
@@ -17,6 +18,22 @@
                 border:none !important;
             }
         </style>
+        <script>
+            $(document).ready(function(){
+                $('img').mouseenter(function(){
+                    $(this).animate({width:"+=5px"}, 200);
+                })
+                $('img').mouseleave(function(){
+                    $(this).animate({width:"-=5px"}, 200);
+                })
+                $('#show_woo').mouseenter(function(){
+                    $('#woo').html("<span style='color: #D9534F; background-color: white; border-radius: 4px; margin-left: 6px; padding-right: 6px; padding-left: 6px;'>Woo!</span>");
+                })
+                $('#show_woo').mouseleave(function(){
+                    $('#woo').html("");
+                })
+            })
+        </script>
     </head>
     <body>
 
@@ -65,17 +82,19 @@
             <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-color: #b8b8b8; border: 1px solid black; border-left: 0;" class="col-md-5">
                 <h3>Brands Reference</h3>
 
-                <table style="width: 100%;">
+                <table style="width: 100%; height: 70px;">
                     <tr>
-                        <td style="text-align: center;">
-                            @if ($guitar_imgs)
-                                @foreach ($guitar_imgs as $guitar)
-                                    <img src="/img/{{ $guitar->name }}.png" style="width:60px;heigth:40px;">
-                                @endforeach
-                            @else
+                        @if ($guitar_imgs)
+                            @foreach ($guitar_imgs as $guitar)
+                                <td style="text-align: center; width: 70px;">
+                                    <img id="brand" src="/img/{{ $guitar->name }}.png" style="width:60px;heigth:40px;">
+                                </td>
+                            @endforeach
+                        @else
+                            <td>
                                 <p>Guitars added will show up here</p>
-                            @endif
-                        </td>
+                            </td>
+                        @endif
                     </tr>
                 </table>
 
@@ -100,7 +119,7 @@
                         <td></td>
                         <td><br />
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                            <input type="submit" value="Add Guitar" class="btn btn-danger">
+                            <p><input id="show_woo" type="submit" value="Add Guitar" class="btn btn-danger"><span id="woo"></span></p>
                             <br /><br />
                         </td>
                     </tr>

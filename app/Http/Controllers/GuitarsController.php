@@ -33,7 +33,7 @@ class GuitarsController extends Controller
         $guitar = DB::table('guitars')->where(['id' => $id])->first();
         $guitar->posts = Post::where(['guitar_id' => $id])->get();
         $guitar->comments = DB::table('users')->join('comments', 'users.id', '=', 'comments.user_id')->get();
-        $guitar->other_users = DB::table('users')->join('likes', 'users.id', '=', 'likes.user_id')->join('guitars', 'likes.guitar_id', '=', 'guitars.id')->where('guitars.id', '=', $id)->where('likes.user_id', '!=', Auth::user()->id)->select('users.email')->get();
+        $guitar->other_users = DB::table('users')->join('likes', 'users.id', '=', 'likes.user_id')->join('guitars', 'likes.guitar_id', '=', 'guitars.id')->where('guitars.id', '=', $id)->where('likes.user_id', '!=', Auth::user()->id)->select('users.email')->take(3)->get();
         $guitar->auth_id = Auth::user()->id;
 
         $other_users_arr = [];
