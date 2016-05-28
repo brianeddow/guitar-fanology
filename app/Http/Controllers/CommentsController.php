@@ -23,6 +23,7 @@ class CommentsController extends Controller
             'body' => $body,
             'post_id' => $post_id
         ]);
+        
         return back();
     }
 

@@ -24,6 +24,7 @@ class GuitarsController extends Controller
         $name = $request->input('name');
         $model = $request->input('model');
         $notes = $request->input('notes');
+
         DB::table('guitars')->insert([
             'name' => $name,
             'model' => $model,
@@ -31,6 +32,7 @@ class GuitarsController extends Controller
             'created_at' => new DateTime,
             'updated_at' => new DateTime
         ]);
+
         return back();
     }
 
@@ -43,6 +45,7 @@ class GuitarsController extends Controller
         $guitar->auth_id = Auth::user()->id;
         $guitar->fanologists = count(DB::table('users')->get());
         $other_users_arr = [];
+        
         foreach ($guitar->other_users as $user)
         {
             array_push($other_users_arr, $user);
