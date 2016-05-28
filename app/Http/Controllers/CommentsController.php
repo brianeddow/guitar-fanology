@@ -18,7 +18,11 @@ class CommentsController extends Controller
         ]);
 
         $body = $request->input('body');
-        DB::table('comments')->insert(['user_id' => Auth::user()->id, 'body' => $body, 'post_id' => $post_id]);
+        DB::table('comments')->insert([
+            'user_id' => Auth::user()->id,
+            'body' => $body,
+            'post_id' => $post_id
+        ]);
         return back();
     }
 

@@ -21,17 +21,36 @@
         <script>
             $(document).ready(function(){
                 $('img').mouseenter(function(){
-                    $(this).animate({width:"+=5px"}, 200);
+                    $(this).animate({width:"+=5px"}, 100);
                 })
                 $('img').mouseleave(function(){
-                    $(this).animate({width:"-=5px"}, 200);
+                    $(this).animate({width:"-=5px"}, 100);
                 })
                 $('#show_woo').mouseenter(function(){
-                    $('#woo').html("<span style='color: #D9534F; background-color: white; border-radius: 4px; margin-left: 6px; padding-right: 6px; padding-left: 6px;'>Woo!</span>");
+                    $('#woo').html("<span style='color: #D9534F; font-weight: bold; background-color: white; border-radius: 4px; margin-left: 6px; padding-right: 6px; padding-left: 6px;'>Woo!</span>");
                 })
                 $('#show_woo').mouseleave(function(){
                     $('#woo').html("");
                 })
+
+                var updateClock = function() {
+                    function pad(n) {
+                        return (n < 10) ? '0' + n : n;
+                    }
+
+                    var now = new Date();
+                    var s = pad(now.getHours()) + ':' +
+                            pad(now.getUTCMinutes()) + ':' +
+                            pad(now.getUTCSeconds());
+
+                    $('#clock').html(s);
+
+                    var delay = 1000 - (now % 1000);
+                    setTimeout(updateClock, delay);
+                };
+
+                $('#clock').html(updateClock());
+
             })
         </script>
     </head>
@@ -44,13 +63,20 @@
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
             </td>
             <td style="text-align: right;" class="col-md-4">
-                <a href="/logout">Logout</a> (as <?php echo Auth::user()->email ?>)
+                @if($fanologists)
+                    {{ $fanologists }} fans
+                @endif
+                | <span id="clock"></span> | <a href="/logout">Logout</a> (as <?php echo Auth::user()->email ?>)
             </td>
         </tr>
         <tr>
             <td style="vertical-align: top; background-color: #b8b8b8; border: 1px solid black; border-right: 0px;" class="col-md-5">
                 <h3>Welcome</h3>
-                <p> - What tuning do you play in?</p>
+                <p> -
+                    @if($tagline)
+                        {{ $tagline }}
+                    @endif
+                </p>
 
                 <hr>
                 <h3>Guitars</h3>
@@ -79,7 +105,7 @@
                 @endif
 
             </td>
-            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-color: #b8b8b8; border: 1px solid black; border-left: 0;" class="col-md-5">
+            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-repeat: repeat-y; background-color: #b8b8b8; border: 1px solid black; border-left: 0;" class="col-md-5">
                 <h3>Brands Reference</h3>
 
                 <table style="width: 100%; height: 70px;">
@@ -120,7 +146,7 @@
                         <td><br />
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             <p><input id="show_woo" type="submit" value="Add Guitar" class="btn btn-danger"><span id="woo"></span></p>
-                            <br /><br />
+                            <br />
                         </td>
                     </tr>
                 </table>
@@ -132,6 +158,7 @@
                     @endforeach
                     </ul>
                 @endif
+                <br /><br />
 
             </td>
         </tr>

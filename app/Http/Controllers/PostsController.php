@@ -19,7 +19,13 @@ class PostsController extends Controller
         ]);
 
         $body = $request->input('body');
-        DB::table('posts')->insert(['user_id' => Auth::user()->id, 'guitar_id' => $guitar_id, 'body' => $body, 'created_at' => new DateTime, 'updated_at' => new DateTime]);
+        DB::table('posts')->insert([
+            'user_id' => Auth::user()->id,
+            'guitar_id' => $guitar_id,
+            'body' => $body,
+            'created_at' => new DateTime,
+            'updated_at' => new DateTime
+        ]);
         return back();
     }
 

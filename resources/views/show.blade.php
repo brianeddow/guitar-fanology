@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <style>
             input.transparent-input{
                background-color: rgba(255,255,255,0.5) !important;
@@ -17,6 +18,25 @@
                border:none !important;
             }
         </style>
+        <script>
+        var updateClock = function() {
+            function pad(n) {
+                return (n < 10) ? '0' + n : n;
+            }
+
+            var now = new Date();
+            var s = pad(now.getHours()) + ':' +
+                    pad(now.getUTCMinutes()) + ':' +
+                    pad(now.getUTCSeconds());
+
+            $('#clock').html(s);
+
+            var delay = 1000 - (now % 1000);
+            setTimeout(updateClock, delay);
+        };
+
+        $('#clock').html(updateClock());
+        </script>
     </head>
     <body>
 
@@ -27,7 +47,10 @@
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
             </td>
             <td style="text-align: right;" class="col-md-4">
-                <a href="/logout">Logout</a> (as <?php echo Auth::user()->email; ?>)
+                @if($guitar->fanologists)
+                    {{ $guitar->fanologists }} fans
+                @endif
+                | <span id="clock"></span> | <a href="/logout">Logout</a> (as <?php echo Auth::user()->email; ?>)
             </td>
         </tr>
         <tr>
@@ -70,7 +93,7 @@
                     @if ($guitar->posts)
                         @foreach ($guitar->posts as $post)
                             <p style="background-color: #DDCDB6; border-radius: 6px; padding-left: 10px;">{{ $post->body }}<br />
-                            by <span style="font-weight: bold;">{{ $post->user->email }}<span>
+                            by <span style="font-weight: bold;">{{ $post->user->email }}</span>
 
                             @if ($post->user_id == $guitar->auth_id)
                                  - <a href="/posts/<?php echo $post->id; ?>/delete/">delete</a></p>
@@ -120,7 +143,7 @@
                 </div>
 
             </td>
-            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-color: #b8b8b8; border: 1px solid black; border-left: 0px;" class="col-md-5">
+            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-repeat: repeat-y; background-color: #b8b8b8; border: 1px solid black; border-left: 0px;" class="col-md-5">
                 <h3>Actions</h3>
 
                 <a href="/guitars/<?php echo $guitar->id ?>/like">like</a> (<a href="/guitars/<?php echo $guitar->id ?>/unlike">undo</a>)<br />

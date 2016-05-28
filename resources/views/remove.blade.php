@@ -7,6 +7,26 @@
         <link rel="stylesheet" href="/css/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script>
+        var updateClock = function() {
+            function pad(n) {
+                return (n < 10) ? '0' + n : n;
+            }
+
+            var now = new Date();
+            var s = pad(now.getHours()) + ':' +
+                    pad(now.getUTCMinutes()) + ':' +
+                    pad(now.getUTCSeconds());
+
+            $('#clock').html(s);
+
+            var delay = 1000 - (now % 1000);
+            setTimeout(updateClock, delay);
+        };
+
+        $('#clock').html(updateClock());
+        </script>
     </head>
     <body>
 
@@ -17,11 +37,14 @@
                 <h1 style="font-family: Indie Flower;">Guitar Fanology</h1>
             </td>
             <td style="text-align: right;" class="col-md-4">
-                <a href="/logout">Logout</a> (as <?php echo Auth::user()->email; ?>)
+                @if($guitar->fanologists)
+                    {{ $guitar->fanologists }} fans
+                @endif
+                | <span id="clock"></span> | <a href="/logout">Logout</a> (as <?php echo Auth::user()->email; ?>)
             </td>
         </tr>
         <tr>
-            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-color: #B8B8B8; border: 1px solid black;" class="col-md-5">
+            <td style="vertical-align: top; background-image: url('/img/side.jpg'); background-repeat: repeat-y; background-color: #B8B8B8; border: 1px solid black;" class="col-md-5">
                 <h3>Destroy Axe...</h3>
 
                 @if ($guitar)
