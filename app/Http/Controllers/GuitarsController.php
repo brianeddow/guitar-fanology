@@ -16,7 +16,7 @@ class GuitarsController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|in:Gibson,Epiphone,Esp,Fender,Ibanez,Jackson,Yamaha',
             'model' => 'required',
             'notes' => 'required'
         ]);
@@ -45,7 +45,7 @@ class GuitarsController extends Controller
         $guitar->auth_id = Auth::user()->id;
         $guitar->fanologists = count(DB::table('users')->get());
         $other_users_arr = [];
-        
+
         foreach ($guitar->other_users as $user)
         {
             array_push($other_users_arr, $user);

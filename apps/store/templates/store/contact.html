@@ -1,8 +1,0 @@
-<h1>Contact Us!</h1>
-
-<form action="{% url 'submit_contact_form' %}"  method="post">
-	{% csrf_token %}
-	<p>Name: {{ form.full_name }}</p>
-	<p>Email: {{ form.email }}</p>
-	<input type="submit" value="Submit" />
-</form>
